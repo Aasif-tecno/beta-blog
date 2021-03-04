@@ -23,7 +23,13 @@ default: &default
 
 development:
   <<: *default
+  host: localhost
+  port: 5432
   database: Beta_Blogs_development
+  pool: 15
+  timeout: 5000
+  username: postgres
+  password: root
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
