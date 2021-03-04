@@ -17,12 +17,12 @@
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control' %>
   </div>
-  
+
   <% if form.object.new_record? %>
-    <% form.fields_for :posts do |post| %>
+    <%= form.fields_for :posts do |post| %>
       <div class="form-group">
         <%= post.label :body %>
-        <%= post.text_field :body, date: { controller: "mentions", targe: "mestions.field" } %>
+        <%= post.rich_text_area :body, date: { controller: "mentions", targe: "mestions.field" }, class: 'form-control',style:"height: 100px" %>
       </div>
     <% end %> 
   <% end %> 

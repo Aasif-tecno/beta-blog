@@ -1,0 +1,10 @@
+<p>
+  <%= image_tag avatar_path(@post.user), height: 40, width: 40, style: "border-radius:50%; verticle-align:middle;" %>
+  <%= @post.user.name %> just posted a reply in <%= link_to @discussion.title, discussion_url(@discussion, anchor: @post.id)%>
+</p>
+
+<p style="font-size:small;color:#666">
+<br>
+You are recieving this because you are subscribed to this thread<br>
+<%= link_to "view the discussion", discussion_url(@discussion, anchor: @post.id), target: :_blank%>
+</p>

@@ -13,33 +13,25 @@
   </div>
 </div>
 
+
 <div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-    
-
-            <th>User</th>
-            <th>Title</th>
-            
-          <th></th>
-        
-      </tr>
-    </thead>
-
+  <table class="table table-bordered table-hover">
     <tbody>
       <% @discussions.each do |discussion| %>
         <%= content_tag :tr, id: dom_id(discussion), class: dom_class(discussion) do %>
-          
-
-                      <td><%= discussion.user %></td>
-                      <td><%= discussion.title %></td>
-          
-          
-            <td><%= link_to 'Show', discussion %></td>
-          
+          <td><%= image_tag avatar_path(discussion.user), class:"rounded-circle", height: 40, width: 40 %>
+          <%= discussion.user.name %></td>
+          <td><%= discussion.title %></td>
+          <td>Post <%= discussion.posts.count %></td>                   
+          <td><%= link_to 'Show', discussion, class: "btn btn-primary"%></td>
         <% end %>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<script>
+$("tr[data-link]").click(function() {
+  window.location = $(this).data("link")
+})
+</script>

@@ -24,6 +24,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = current_user.discussion.new(discussion_params)
     @discussion.posts.each{|post| post.user = current_user }
+    
     respond_to do |format|
       if @discussion.save
         format.html { redirect_to @discussion, notice: "Discussion was successfully created." }

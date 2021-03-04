@@ -1,0 +1,15 @@
+<div id="<%= dom_id(post) %>" class="flex pb-6 border-b mb-6 group">  
+  <div class="flex-1">
+    <div class="mb-3">
+      <%= image_tag avatar_path(post.user), class:"rounded-circle", height: 40, width: 40 %>
+      <span class="font-weight-bold"><%= post.user.name %></span> -
+      <span class="text-green-500"></span><%= link_to time_ago_in_words(post.created_at), discussion_path(@discussion, anchor: post.id), class: "ml-1 hover-underline text-blue-700" %>
+      <% if user_signed_in? && current_user == post.user %>
+        <span class="text-gray-600">-<span><%= link_to 'Edit', edit_discussion_post_path(@discussion,post), class: "ml-1 hover:underline"%>
+      <% end %>
+    </div>
+    <div class="ml-5 font-italic">
+      <%= post.body %>
+    </div><hr>
+  </div>
+</div>

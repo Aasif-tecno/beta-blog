@@ -1,13 +1,16 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :discussions
+  resources :discussions do
+    resources :posts
+  end
   namespace :admin do
     resources :users
     resources :services
     resources :notifications
     resources :announcements
-
+    resources :discussions
+    resources :posts
     root to: "users#index"
   end
   get '/privacy', to: 'home#privacy'
