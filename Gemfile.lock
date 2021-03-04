@@ -190,7 +190,6 @@ GEM
     mimemagic (0.3.5)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
     minitest (5.14.4)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
@@ -201,8 +200,7 @@ GEM
     name_of_person (1.1.1)
       activesupport (>= 5.2.0)
     nio4r (2.5.7)
-    nokogiri (1.11.1)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
     noticed (1.2.21)
       http (>= 4.0.0)
@@ -351,7 +349,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   administrate!
@@ -395,4 +393,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   1.17.3
+   2.2.13
