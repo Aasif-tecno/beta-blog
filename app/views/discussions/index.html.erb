@@ -18,18 +18,17 @@
   <table class="table table-bordered table-hover">
     <tbody>
       <% @discussions.each do |discussion| %>
-        <%= content_tag :tr, id: dom_id(discussion), class: dom_class(discussion) do %>
+        <tr data-link="<%= discussion %>"> 
           <td><%= image_tag avatar_path(discussion.user), class:"rounded-circle", height: 40, width: 40 %>
           <%= discussion.user.name %></td>
           <td><%= discussion.title %></td>
           <td>Post <%= discussion.posts.count %></td>                   
           <td><%= link_to 'Show', discussion, class: "btn btn-primary"%></td>
-        <% end %>
+        </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
 <script>
 $("tr[data-link]").click(function() {
   window.location = $(this).data("link")

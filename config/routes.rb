@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :projects do
+    resources :tasks
+  end
   resources :discussions do
     resources :posts
   end
@@ -11,6 +14,8 @@ Rails.application.routes.draw do
     resources :announcements
     resources :discussions
     resources :posts
+    resources :projects
+    resources :tasks
     root to: "users#index"
   end
   get '/privacy', to: 'home#privacy'

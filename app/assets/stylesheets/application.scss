@@ -20,3 +20,10 @@
 body > .alert {
   margin-bottom: 0;
 }
+
+.project-card{
+  transition: background-color 0.5s ease;
+  &:hover{
+    background-color: #f7f7f7;
+  }
+}

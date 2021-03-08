@@ -199,6 +199,7 @@ GEM
     multipart-post (2.1.1)
     name_of_person (1.1.1)
       activesupport (>= 5.2.0)
+    nested_scaffold (1.1.0)
     nio4r (2.5.7)
     nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
@@ -367,6 +368,7 @@ DEPENDENCIES
   listen (~> 3.3)
   mini_magick (~> 4.10, >= 4.10.1)
   name_of_person (~> 1.1)
+  nested_scaffold
   noticed (~> 1.2)
   omniauth-facebook (~> 6.0)
   omniauth-github (~> 1.4)

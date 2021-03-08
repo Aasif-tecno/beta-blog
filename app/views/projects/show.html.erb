@@ -1,0 +1,59 @@
+<%= link_to "Back" , projects_path, class: "btn btn-primary mb-3"%>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title d-flex justify-content-between mb-4">
+      <%= @project.name%>
+      <div>
+        <%= link_to "edit",edit_project_path(@project), class: 'btn btn-warning'%>
+        <%= link_to 'Destroy', @project, method: :delete, class:"btn btn-danger", data: { confirm: 'Are you sure?' } %>
+      </div>   
+    </h2>
+  </div>
+  <div class="card-body">
+  <h5>Add Task </h5>
+  <%= form_with(model: [@task.project, @task]) do |f| %>
+    <% if @task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+        <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.hidden_field :status, value: 'not-started' %>
+    <div class="input-group p-3">
+      <%= f.text_field :name, class: "form-control", placeholder: "Enter task name" %>
+      <div class="input-group-append">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
+  <% end %>
+  </div>
+  <h5>Tasks</h5>
+  <% @project.tasks.order(created_at: :desc).each do |task| %>
+    <% if task.persisted? %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <span class="badge badge-<%= task.badge_color %> mb-3"><%= task.status %></span>
+            <div>
+              <%= link_to "edit",edit_project_task_path(task.project, task), class: 'btn btn-warning btn-sm'%>
+              <%= link_to 'Destroy', [task.project, task], method: :delete, class:"btn btn-danger btn-sm", data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+          <h5 class="card-title"><%= task.name %></h5>
+          <%= task.description%>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+</div>
+<%
+=begin%>
+ <%= link_to 'New Task', new_project_task_path(@project.id) %> 
+<%
+=end%>
