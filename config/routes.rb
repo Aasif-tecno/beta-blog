@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  
+  resources :blogs do 
+    resources :elements
+  end
   resources :projects do
     resources :tasks
   end
@@ -14,7 +18,7 @@ Rails.application.routes.draw do
     resources :announcements
     resources :discussions
     resources :posts
-    resources :projects
+    resources :projectso 
     resources :tasks
     root to: "users#index"
   end

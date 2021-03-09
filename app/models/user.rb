@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :services
   has_many :discussion
   has_many :posts
+  has_many :blogs
   has_many :projects
   has_many :tasks
 end

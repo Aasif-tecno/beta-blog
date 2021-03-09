@@ -1,0 +1,50 @@
+<%= form_with(model: blog, local: true) do |form| %>
+ <% if blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% blog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :header_image %><br>
+    <%= form.file_field :header_image %>
+    <div class="mt-1">
+      <% if blog.header_image.present? %>
+     <small>Current Image</small>
+        <%= image_tag(blog.header_image, width: '100%') %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <% if blog.persisted? %>
+     
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary btn-block mb-3' %>
+
+    <% if blog.persisted? %>
+      <div class="float-right">
+        <%= link_to 'Destroy', blog, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+      <%= link_to "Cancel", blog, class: "btn btn-warning" %>
+    <% else %>
+      <%= link_to "Cancel", blogs_path, class: "btn btn-warning" %>
+    <% end %>
+  </div>
+<% end %>

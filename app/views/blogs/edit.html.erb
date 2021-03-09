@@ -1,0 +1,121 @@
+
+<div class="row"> 
+  <div class="col-md-4">
+    <%= link_to "Back", blogs_path, class: "btn btn-primary mb-3" %>
+    <div class="card mb-3">
+      <div class="card-header">
+        <h6 class="card-title">Editing Blog</h6>
+      </div>
+      <div class="card-body">
+        <%= render 'form', blog: @blog %>
+      </div>
+      <div class="card-footer">
+        <% if @blog.published? %>
+          <a href="#" 
+           class="btn btn-danger btn-block"
+           data-reflex='click->PublisherReflex#unpublish'
+           data-blog-id='<%= @blog.id%>'>Unpublish
+          </a>
+        <% else %>
+          <a href="#" 
+           class="btn btn-primary btn-block" 
+           data-reflex='click->PublisherReflex#publish'
+           data-blog-id='<%= @blog.id%>'>Publish
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="mb-3">
+        <%= form_with(model: [@blog, @element], html: { class: "float-left mr-2"}) do |form| %>
+        <%= form.hidden_field :element_type, value: 'paragraph' %>
+        <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+          <%= icon('fas', 'paragraph')%>
+        <% end %>
+        <% end %>
+        <%= form_with(model: [@blog, @element]) do |form| %>
+        <%= form.hidden_field :element_type, value: 'image' %>
+        <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+          <%= icon('fas', 'image')%>
+        <% end %>
+        <% end %>
+    </div>
+    <div class="card">
+      <div class="card-header text-right">
+        <% if @blog.published?%>
+          <span class="badge badge-primary mr-1">
+            Published
+          </span><%= time_ago_in_words(@blog.published_at) %> ago
+        <% else %>
+          <span class="badge badge-secondary mr-1">
+            Unpublished
+          </span>
+        <% end %>
+      </div>
+
+      <div class="card-body pt-5" data-controller="elements">
+        <% if @blog.elements.none? {|element|  element.persisted?}%>
+          <div class="p-5 text-center">
+            <h2 class="text-secondary">
+            <%= icon('fas', 'lightbulb')%>
+            <p> Click the icons above to add elements to this blog</p>
+            </h2>
+          </div>
+        <% else %>
+          <ul id="elements" data-action="drop->elements#sort">
+            <% @blog.elements.order(position: :asc).each do |element|%>
+              <% if element.persisted? %>
+                <li data-id="<%= element.id%>" class="element-item">
+                  <% if element.paragraph? %>
+                    <div class="mb-3 p-3 edit-paragraph">
+                      <div class="paragraph-content">
+                          <% if element.content.present?%>
+                          <%= element.content%>
+                          <% else %>
+                          Click to add content
+                          <% end %>  
+                      </div>
+                      <div class="paragraph-form d-none">
+                          <%= form_with(model: [@blog, element]) do |form| %>
+                          <%= form.rich_text_area :content%>
+                          <div class="mb-3 mt-3 d-flex justify-content-between">
+                            <div>
+                              <%= form.submit "Save", class: "btn btn-primary"%>
+                              <a href="#" class="cancel btn btn-secondary">Cancel </a>
+                            </div>
+                            <%= link_to "Delete", blog_element_path(@blog, element), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sur?" }%>
+                          </div>
+                          <% end %>
+                      </div>
+                    </div>
+                  <% else element.image? %>
+                    <div class="mb-4 p-3 image">
+                      <% if element.image.present? %>
+                        <%= link_to blog_element_path(@blog, element), method: :delete, class: "delete-btn btn btn-dark mt2 float-right", data: { confirm: "Are you sur?" } do %>
+                          <%= icon('fas', 'times')%>
+                        <% end %>
+                        <%= image_tag(element.image) %>
+                      <% else %>
+                        <%= form_with(model: [@blog, element]) do |form| %>
+                          <%= form.file_field :image %>
+                          <div class="mb-3">
+                              <%= form.submit "Save", class: "btn btn-primary"%>
+                              <a href="#" class="cancel btn btn-secondary">Cancel </a>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

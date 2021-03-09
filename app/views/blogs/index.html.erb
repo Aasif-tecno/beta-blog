@@ -1,0 +1,30 @@
+<h4 class="d-flex justify-content-between mb-4">
+  <span>Post</span>
+  <%= link_to 'New Blog', new_blog_path, class: 'btn btn-primary'%>
+</h4>
+
+<% @blogs.each do |blog| %>
+  <%= link_to edit_blog_path(blog), class: "text-decoration-none" do %>
+    <div class="card mb-3 post-card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2">
+            <% if blog.header_image.present?%>
+            <div class="header-img" style="background-image: url(<%= url_for(blog.header_image)%>);">
+            </div>
+            <% end %>
+          </div>
+          <div class="col-md-10">
+            <% if blog.published?%>
+              <span class="badge badge-primary mb-2">Published</span>
+            <% else%>
+              <span class="badge badge-secondary mb-2">Unpublished</span>
+            <% end%>
+            <h5 class="card-title text-dark mb-3"><%= blog.title %></h5>
+            <p class="text-secondary mb-0"><%= blog.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
