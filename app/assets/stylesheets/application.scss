@@ -61,12 +61,31 @@ body > .alert {
   }
 }
 .home-card{
-  height: 500px;
+  height: 550px;
   img{
-    height: 280px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
   }
 }
 #elements {
   list-style: none;
   padding: 0;
+}
+.blogs.show{
+  .post-card{
+    .card-img-top{
+      height: 350px;
+      background-size: cover;
+    }
+    .show-image{
+      text-align: center;
+      img{
+        max-width: 80%;
+      }
+    } 
+    .card-img-top{
+      height: 500px;
+    }
+  }
 }

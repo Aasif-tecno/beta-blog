@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
+  get 'stats'=> 'stats#index'
   resources :blogs do 
     resources :elements
   end

@@ -9,6 +9,7 @@
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^4.6.0",
     "cable_ready": "^4.5.0",
+    "chart.js": "^2.9.4",
     "data-confirm-modal": "^1.6.2",
     "expose-loader": "^2.0.0",
     "jquery": "^3.6.0",

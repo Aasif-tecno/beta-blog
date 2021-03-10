@@ -23,7 +23,10 @@ $(document).on("turbolinks:load", () => {
 require("trix")
 require("@rails/actiontext")
 
+const Chart = require('chart.js')
+
 document.addEventListener('turbolinks:load', () => {
+
   document.addEventListener('click', () => {
     let element = event.target.closest('.paragraph-content')
     if (!element) return;

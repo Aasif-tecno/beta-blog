@@ -8,13 +8,12 @@
     <div class="card mb-3 post-card">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <% if blog.header_image.present?%>
-            <div class="header-img" style="background-image: url(<%= url_for(blog.header_image)%>);">
-            </div>
+             <img class="card-img-top header-img" src="<%= url_for(blog.header_image)%>" alt="Card image cap">
             <% end %>
           </div>
-          <div class="col-md-10">
+          <div class="col-md-9">
             <% if blog.published?%>
               <span class="badge badge-primary mb-2">Published</span>
             <% else%>

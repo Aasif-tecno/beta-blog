@@ -1,27 +1,29 @@
-<div class="page-header">
-  <%= link_to blogs_path, class: 'btn btn-default' do %>
-    All Blogs
+<div class="d-flex justify-content-between mb-3">
+  <%= link_to "back", root_path, class: 'btn btn-primary' %>
+  <% if current_user == @blog.user %>
+    <%= link_to "Edit",edit_blog_path(@blog), class: 'btn btn-primary'%>
   <% end %>
-  <%= link_to edit_blog_path(@blog), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show blog</h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Title:</dt>
-  <dd><%= @blog.title %></dd>
-
-  <dt>Description:</dt>
-  <dd><%= @blog.description %></dd>
-
-  <dt>Published:</dt>
-  <dd><%= @blog.published %></dd>
-
-  <dt>Published at:</dt>
-  <dd><%= @blog.published_at %></dd>
-
-  <dt>User:</dt>
-  <dd><%= @blog.user %></dd>
-
-</dl>
+<div class="card post-card mb-5">
+ 
+  <img class="card-img-top" src="<%= url_for(@blog.header_image)%>" alt="Card image cap">
+  <div class="card-body">
+    <div class="p-4">
+      <h3 class="card-title"><%= @blog.title %></h3>
+      <% @blog.elements.each do |element| %>
+        <% if element.image? %>
+          <div class="show-image mb-3">
+            <%= image_tag(element.image) %>
+          </div>
+        <% else %>
+          <div class="content-elemet mb-3">
+            <%= element.content %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <p class="text-secondary">Impressions <%= @blog.impressionist_count %></p>
+  </div>
+</div>
+ 
+ 

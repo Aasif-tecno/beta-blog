@@ -42,7 +42,7 @@ class ElementsController < ApplicationController
   private
 
     def set_blog
-      @blog = current_user.blogs.find(params[:blog_id])
+      @blog = current_user.blogs.friendly.find(params[:blog_id])
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_element

@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :set_blog, only: %i[ edit update destroy ]
+  before_action :authenticate_user!, except: [:show]
   # GET /blogs or /blogs.json
   def index
     @blogs = current_user.blogs
@@ -8,6 +8,8 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1 or /blogs/1.json
   def show
+    @blog = Blog.published.friendly.find(params[:id])
+    impressionist(@blog)
   end
 
   # GET /blogs/new
